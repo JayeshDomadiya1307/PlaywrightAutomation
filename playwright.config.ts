@@ -10,16 +10,19 @@ export default defineConfig({
 
   use: {
     trace: "on-first-retry",
+    screenshot: "on",
+    headless: false,
+    browserName: 'chromium'
   },
 
   /* Configure projects for major browsers */
-  projects: [
+  /* projects: [
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
     },
 
-    /* {
+   {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
@@ -27,6 +30,6 @@ export default defineConfig({
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
-    }, */
-  ],
+    }, 
+  ],*/
 });
