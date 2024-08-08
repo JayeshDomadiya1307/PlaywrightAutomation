@@ -1,5 +1,4 @@
 import { expect, test } from "@playwright/test";
-import { text } from "stream/consumers";
 
 test("Handle child windows", async ({ browser }) => {
   const context = await browser.newContext();
@@ -18,6 +17,7 @@ test("Handle child windows", async ({ browser }) => {
   await documentLink.click();
   const newPage  = await pagePromise;
   await newPage.waitForLoadState()
-  await newPage.locator('.im-para.red').textContent()
-  console.log(text)
+  const text = await newPage.locator('.im-para.red').textContent()
+  await expect(text).toContain('rahulshettyacademy')
+  
 });

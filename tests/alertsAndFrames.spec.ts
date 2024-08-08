@@ -17,6 +17,7 @@ test('Alers and iFrames', async ({page}) => {
     await page.on('dialog', dialog => dialog.accept())
     await page.locator('#alertbtn').click()
     await page.locator('#confirmbtn').click()
+    await page.locator('#mousehover').hover()
 
     const frame =  page.frameLocator('#courses-iframe')
     await frame.locator('li a[href*="lifetime-access"]:visible').nth(1).click()

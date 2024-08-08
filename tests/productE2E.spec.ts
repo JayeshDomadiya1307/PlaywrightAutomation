@@ -40,18 +40,18 @@ test.only("ECommerce End to End Flow of Purchase product", async ({ page }) => {
   await page.waitForSelector(".ta-results");
   const elements = await page.$$(".ta-results");
 
-  //   const dropdown = await page.locator(".ta-results");
-  // dropdown.waitFor();
-  //   await page.waitForTimeout(5000);
-  //   const optionsCount = await dropdown.locator("button").count();
+  /* const dropdown = await page.locator(".ta-results");
+  dropdown.waitFor();
+    await page.waitForTimeout(5000);
+    const optionsCount = await dropdown.locator("button").count();
 
-  //   for (let i = 0; i < dropdown.length ; i++) {
-  //     const searchResult = await dropdown.locator("button").nth(i).textContent();
-  //     if (searchResult?.includes("India")) {
-  //       await dropdown.locator("button").nth(i).click();
-  //       break;
-  //     }
-  //   }
+    for (let i = 0; i < dropdown.length ; i++) {
+      const searchResult = await dropdown.locator("button").nth(i).textContent();
+      if (searchResult?.includes("India")) {
+        await dropdown.locator("button").nth(i).click();
+        break;
+      }
+    } */
 
   for (let i = 0; i < elements.length; i++) {
     const text = await elements[i].textContent();
@@ -69,25 +69,23 @@ test.only("ECommerce End to End Flow of Purchase product", async ({ page }) => {
     " Thankyou for the order. "
   );
 
-  orderId = await page.locator('.em-spacer-1 .ng-star-inserted').textContent()
+  orderId = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
   // orderId = 666db51bae2afd4c0bffb3db
-  console.log(orderId)
+  console.log(orderId);
 
-  await page.locator('[routerlink*="myorders"]').first().click()
+  await page.locator('[routerlink*="myorders"]').first().click();
 
-  const tableRows =  await page.locator('tbody tr')
-  
+  const tableRows = await page.locator("tbody tr");
 
-  for(let i=0; i< await tableRows.count(); i++ ) {
-    const searchOrderId = await tableRows.nth(i).locator('th').textContent()
-    
-    if(orderId?.includes(searchOrderId)) {
-        await tableRows.nth(i).locator('text=View').click()
-        break;
+  for (let i = 0; i < (await tableRows.count()); i++) {
+    const searchOrderId = await tableRows.nth(i).locator("th").textContent();
+
+    if (orderId?.includes(searchOrderId)) {
+      await tableRows.nth(i).locator("button").first().click();
+      break;
     }
   }
 
-  const orderIdConfirm = await page.locator('.col-text').textContent()
-  await expect(orderId).toContain(orderIdConfirm)
-
+  const orderIdConfirm = await page.locator(".col-text").textContent();
+  await expect(orderId).toContain(orderIdConfirm);
 });
